@@ -1,12 +1,14 @@
 import React from 'react'
 
-import { Image, View, StyleSheet, Dimensions, Text } from 'react-native';
+import { Image, View, StyleSheet, Dimensions, Text, Button, Alert } from 'react-native';
 import { useFonts, Montserrat_400Regular, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 
 
 import Foto from '../../assets/topo.png';
 import Logo from '../../assets/logo.png'
 import Texto from './Texto';
+
+import AppLoading from 'expo-app-loading';
 
 const width = Dimensions.get('screen').width;
 
@@ -18,11 +20,11 @@ export default function Cesta() {
         "MontserratBold": Montserrat_700Bold
     });
 
-    if(!fontCarregada) {
+    if (!fontCarregada) {
         return (
-            <View></View>
+            <AppLoading />
         )
-    } 
+    }
 
     return (
 
@@ -37,7 +39,15 @@ export default function Cesta() {
                     <Text style={styles.nomeFazenda} >Jenny Jack Farm</Text>
                 </View>
                 <Texto style={styles.descricao}>Uma cesta com produtos selecionados cuidadozamente da fazenda direto pra cozinha.</Texto>
-                <Text style={styles.preco}> R$ 40,00</Text>
+                <View>
+                    <Text style={styles.preco}> R$ 40,00</Text>
+                    <Button 
+                        style={styles.button}
+                        title="Press me"
+                        color="#2a9f85"
+                        onPress={() => Alert.alert('Simple Button pressed')}
+                    />
+                </View>
             </View>
         </>
 
@@ -102,7 +112,11 @@ const styles = StyleSheet.create({
         fontSize: 26,
         lineHeight: 42,
         marginTop: 8
+    },
+    button:{
+        width: 50
     }
+
 
 })
 
